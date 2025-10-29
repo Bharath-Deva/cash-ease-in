@@ -8,89 +8,98 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    /* Credit2Cash Design System - Mobile-first Fintech */
+    
+    /* Primary brand colors (blue tones) */
+    --primary: 199 100% 36%;        /* #0077b6 */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 193 100% 39%;      /* #0096c7 */
+    --secondary-foreground: 0 0% 100%;
+    
+    --tertiary: 193 100% 42%;       /* #00b4d8 */
+    --tertiary-foreground: 0 0% 100%;
+    
+    /* Status colors */
+    --destructive: 0 67% 50%;       /* #D62828 */
+    --destructive-foreground: 0 0% 100%;
+    
+    --success: 157 38% 66%;         /* #5bb98c */
+    --success-foreground: 157 54% 16%;  /* #173b2c */
+    --success-bg: 143 100% 95%;     /* #edfff1 */
+    
+    /* Surface colors */
+    --background: 0 0% 100%;        /* #ffffff */
+    --foreground: 215 25% 11%;      /* #0f172a */
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 215 25% 11%;
+    
+    --surface: 210 40% 98%;         /* #f8fafc */
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
+    --popover-foreground: 215 25% 11%;
+    
+    /* Text colors */
+    --text-primary: 215 25% 11%;    /* #0f172a */
+    --text-secondary: 215 16% 27%;  /* #334155 */
+    
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 27%;
+    
+    --accent: 210 40% 96%;
+    --accent-foreground: 215 25% 11%;
+    
+    /* UI elements */
+    --border: 214 32% 89%;          /* #e2e8f0 */
+    --input: 214 32% 89%;
+    --ring: 199 100% 36%;
+    
+    /* Border radius (10-12px system) */
+    --radius: 0.625rem;             /* 10px */
+    --radius-lg: 0.75rem;           /* 12px */
+    --radius-sm: 0.5rem;            /* 8px */
+    
+    /* Sidebar (minimal usage) */
     --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-foreground: 215 25% 11%;
+    --sidebar-primary: 199 100% 36%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 215 25% 11%;
+    --sidebar-border: 214 32% 89%;
+    --sidebar-ring: 199 100% 36%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    /* Dark mode minimal implementation */
+    --background: 215 25% 11%;
+    --foreground: 0 0% 100%;
+    --card: 215 21% 16%;
+    --card-foreground: 0 0% 100%;
+    --popover: 215 21% 16%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 193 100% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 199 100% 36%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 215 21% 21%;
+    --muted-foreground: 215 10% 65%;
+    --accent: 215 21% 21%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 67% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 21% 21%;
+    --input: 215 21% 21%;
+    --ring: 193 100% 42%;
+    --sidebar-background: 215 25% 11%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 193 100% 42%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 215 21% 21%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 215 21% 21%;
+    --sidebar-ring: 193 100% 42%;
   }
 }
 
@@ -100,6 +109,17 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Mobile-first touch targets */
+  button, a, input, select, textarea {
+    @apply min-h-[44px];
+  }
+  
+  /* Smooth transitions */
+  * {
+    @apply transition-colors duration-200;
   }
 }
