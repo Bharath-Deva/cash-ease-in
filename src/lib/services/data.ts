@@ -132,3 +132,42 @@ export const addSavingsAccount = (account: Omit<SavingsAccount, 'id'>): void => 
   accounts.push(newAccount);
   localStorage.setItem('c2c_accounts', JSON.stringify(accounts));
 };
+
+// Transfer money from credit card to savings account
+export const transferMoney = (cardId: string, accountId: string, amount: number): Transaction => {
+  const cards = getCards();
+  const accounts = getAccounts();
+  const transactions = getTransactions();
+  
+  const card = cards.find(c => c.id === cardId);
+  const account = accounts.find(a => a.id === accountId);
+  
+  if (!card || !account) {
+    throw new Error('Card or account not found');
+  }
+  
+  // Random status: 60% success, 25% pending, 15% failed
+  const random = Math.random();
+  let status: 'success' | 'pending' | 'failed';
+  if (random < 0.6) {
+    status = 'success';
+  } else if (random < 0.85) {
+    status = 'pending';
+  } else {
+    status = 'failed';
+  }
+  
+  const newTransaction: Transaction = {
+    id: `txn_${Date.now()}`,
+    date: new Date().toISOString(),
+    amount: amount,
+    status: status,
+    type: 'Credit to Cash',
+    description: `${card.bankName} (••${card.cardNumber.slice(-4)}) to ${account.bankName}`,
+  };
+  
+  transactions.unshift(newTransaction); // Add to beginning
+  localStorage.setItem('c2c_transactions', JSON.stringify(transactions));
+  
+  return newTransaction;
+};

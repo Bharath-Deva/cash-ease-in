@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { StepIndicator } from '@/components/StepIndicator';
 import { validateAadhaar, formatAadhaar } from '@/lib/utils/validation';
 import { toast } from 'sonner';
-import { ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ShieldCheck, CheckCircle2, ArrowLeft } from 'lucide-react';
 
 const KYC = () => {
   const navigate = useNavigate();
@@ -124,15 +124,26 @@ const KYC = () => {
                     />
                   </div>
 
-                  <Button
-                    onClick={handleSendAadhaarOtp}
-                    disabled={loading || aadhaar.length !== 12}
-                    className="w-full"
-                    size="lg"
-                  >
-                    {loading ? 'Sending OTP...' : 'Send OTP'}
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  <div className="space-y-3">
+                    <Button
+                      onClick={() => navigate('/identity')}
+                      variant="outline"
+                      className="w-full"
+                      size="lg"
+                    >
+                      <ArrowLeft className="mr-2 h-4 w-4" />
+                      Back
+                    </Button>
+                    <Button
+                      onClick={handleSendAadhaarOtp}
+                      disabled={loading || aadhaar.length !== 12}
+                      className="w-full"
+                      size="lg"
+                    >
+                      {loading ? 'Sending OTP...' : 'Send OTP'}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
                 </>
               ) : (
                 <>

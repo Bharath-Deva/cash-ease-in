@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { StepIndicator } from '@/components/StepIndicator';
 import { validatePAN, validateGST } from '@/lib/utils/validation';
 import { toast } from 'sonner';
-import { ArrowRight, AlertCircle } from 'lucide-react';
+import { ArrowRight, AlertCircle, ArrowLeft } from 'lucide-react';
 
 const Identity = () => {
   const navigate = useNavigate();
@@ -127,15 +127,26 @@ const Identity = () => {
               </div>
             )}
 
-            <Button
-              onClick={handleVerify}
-              disabled={loading || !identityNumber}
-              className="w-full"
-              size="lg"
-            >
-              {loading ? 'Verifying...' : 'Verify & Continue'}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+        <div className="space-y-3">
+          <Button
+            onClick={() => navigate('/user-type')}
+            variant="outline"
+            className="w-full"
+            size="lg"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
+          </Button>
+          <Button
+            onClick={handleVerify}
+            disabled={loading || !identityNumber}
+            className="w-full"
+            size="lg"
+          >
+            {loading ? 'Verifying...' : 'Verify & Continue'}
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
           </CardContent>
         </Card>
 

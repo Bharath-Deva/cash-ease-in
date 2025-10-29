@@ -13,7 +13,10 @@ import {
 } from '@/components/ui/dialog';
 import { BalanceCard } from '@/components/BalanceCard';
 import { TransactionList } from '@/components/TransactionList';
-import { getSummary, getTransactions, addCard, addSavingsAccount } from '@/lib/services/data';
+import { CreditCardList } from '@/components/CreditCardList';
+import { SavingsAccountList } from '@/components/SavingsAccountList';
+import { TransferDialog } from '@/components/TransferDialog';
+import { getSummary, getTransactions, addCard, addSavingsAccount, getCards, getAccounts, transferMoney } from '@/lib/services/data';
 import { isAuthenticated, logout, getSession } from '@/lib/services/auth';
 import { toast } from 'sonner';
 import { CreditCard, Wallet, Plus, LogOut, User } from 'lucide-react';
@@ -30,8 +33,12 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [summary, setSummary] = useState(getSummary());
   const [transactions, setTransactions] = useState(getTransactions());
+  const [cards, setCards] = useState(getCards());
+  const [accounts, setAccounts] = useState(getAccounts());
   const [cardDialogOpen, setCardDialogOpen] = useState(false);
   const [accountDialogOpen, setAccountDialogOpen] = useState(false);
+  const [transferDialogOpen, setTransferDialogOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<any>(null);
   const [userName, setUserName] = useState('User');
 
   // Card form state
@@ -68,6 +75,35 @@ const Dashboard = () => {
     navigate('/login');
   };
 
+  const handleCardClick = (card: any) => {
+    setSelectedCard(card);
+    setTransferDialogOpen(true);
+  };
+
+  const handleTransfer = (accountId: string, amount: number) => {
+    if (!selectedCard) return;
+
+    try {
+      const transaction = transferMoney(selectedCard.id, accountId, amount);
+      
+      // Update state
+      setSummary(getSummary());
+      setTransactions(getTransactions());
+      setTransferDialogOpen(false);
+      
+      // Show appropriate toast based on status
+      if (transaction.status === 'success') {
+        toast.success(`₹${amount.toLocaleString('en-IN')} transferred successfully`);
+      } else if (transaction.status === 'pending') {
+        toast.info(`Transaction of ₹${amount.toLocaleString('en-IN')} is pending approval`);
+      } else {
+        toast.error('Transaction failed');
+      }
+    } catch (error) {
+      toast.error('Transfer failed');
+    }
+  };
+
   const handleAddCard = () => {
     if (!cardNumber || !cardExpiry || !cardCVV || !cardBank) {
       toast.error('Please fill all card details');
@@ -82,6 +118,7 @@ const Dashboard = () => {
     });
 
     setSummary(getSummary());
+    setCards(getCards());
     setCardDialogOpen(false);
     toast.success('Credit card added successfully');
 
@@ -106,6 +143,7 @@ const Dashboard = () => {
     });
 
     setSummary(getSummary());
+    setAccounts(getAccounts());
     setAccountDialogOpen(false);
     toast.success('Savings account added successfully');
 
@@ -285,16 +323,35 @@ const Dashboard = () => {
           </Dialog>
         </div>
 
+        {/* Credit Cards List */}
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-foreground">Your Credit Cards</h2>
+          <CreditCardList cards={cards} onCardClick={handleCardClick} />
+        </div>
+
+        {/* Savings Accounts List */}
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-foreground">Your Savings Accounts</h2>
+          <SavingsAccountList accounts={accounts} />
+        </div>
+
         {/* Transaction History */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-foreground">
-              Transaction History
-            </h2>
-          </div>
+          <h2 className="text-lg font-semibold text-foreground">
+            Transaction History
+          </h2>
           <TransactionList transactions={transactions} />
         </div>
       </main>
+
+      {/* Transfer Dialog */}
+      <TransferDialog
+        open={transferDialogOpen}
+        onOpenChange={setTransferDialogOpen}
+        card={selectedCard}
+        accounts={accounts}
+        onTransfer={handleTransfer}
+      />
     </div>
   );
 };
